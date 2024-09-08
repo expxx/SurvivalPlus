@@ -99,7 +99,7 @@ public class SnowGeneration implements Listener {
 
                 // snowable blocks and the stop
                 case STONE:
-                case GRASS:
+                case GRASS_BLOCK:
                 case DIRT:
                 case COBBLESTONE:
                 case BEDROCK:
