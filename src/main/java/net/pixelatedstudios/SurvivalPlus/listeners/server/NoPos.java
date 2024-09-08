@@ -1,8 +1,9 @@
 package net.pixelatedstudios.SurvivalPlus.listeners.server;
 
 
-import net.minecraft.network.protocol.game.PacketPlayOutEntityStatus;
-import net.minecraft.server.level.EntityPlayer;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
+import net.pixelatedstudios.SurvivalPlus.Survival;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -25,9 +26,10 @@ public class NoPos implements Listener {
     @SuppressWarnings("WeakerAccess")
     public static void disableF3(Player player) {
         try {
-            EntityPlayer player1 = (EntityPlayer) getHandle(player);
-            PacketPlayOutEntityStatus packet = new PacketPlayOutEntityStatus(player1, (byte) 22);
-            player1.b.a(packet);
+            PacketContainer container = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
+            container.getIntegers().write(0, player.getEntityId());
+            container.getBytes().write(0, (byte)22);
+            Survival.getInstance().getProtocolManager().sendServerPacket(player, container);
         } catch (Exception e) {
             Bukkit.getConsoleSender().sendMessage("[SurvivalPlus] " + ChatColor.RED + e.getMessage());
         }
