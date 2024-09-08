@@ -57,7 +57,7 @@ public class WorkbenchShare implements Listener {
                 return;
 
             // Workaround to get the accessed WorkBench
-            final Block workbench = p.getTargetBlock(ImmutableSet.of(Material.GRASS, Material.SNOW, Material.AIR), 8);
+            final Block workbench = p.getTargetBlock(Set.of(Material.GRASS_BLOCK, Material.SNOW, Material.AIR), 8);
 
             if (workbench.getType() != Material.CRAFTING_TABLE) {
                 // Close Inventory if player managed to access the workbench without actually use one.
