@@ -1,5 +1,7 @@
 package net.pixelatedstudios.SurvivalPlus;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.pixelatedstudios.SurvivalPlus.commands.*;
@@ -59,6 +61,7 @@ public class Survival extends JavaPlugin implements Listener {
     private TaskManager taskManager;
     private MerchantManager merchantManager;
     private RecipeManager recipeManager;
+    private ProtocolManager protocolManager;
 
     // Other
     private String prefix;
@@ -151,6 +154,7 @@ public class Survival extends JavaPlugin implements Listener {
         scoreBoardManager = new ScoreBoardManager(this);
         merchantManager = new MerchantManager(this);
         recipeManager = new RecipeManager(this);
+        protocolManager = ProtocolLibrary.getProtocolManager();
 
         // LOAD PLAYER DATA - (during a reload if players are still online)
         playerDataLoader(true);
@@ -438,5 +442,14 @@ public class Survival extends JavaPlugin implements Listener {
 
     public PlayerDataConfig getPlayerDataConfig() {
         return playerDataConfig;
+    }
+
+    /**
+     * Get the ProtocolLib Protocol Manager
+     *
+     * @return {@link ProtocolManager}
+     */
+    public ProtocolManager getProtocolManager() {
+        return protocolManager;
     }
 }
